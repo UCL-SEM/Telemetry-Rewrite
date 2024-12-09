@@ -1,14 +1,14 @@
-// #define current
+#define currentNode
 // #define voltage
 
 #include "lib/Node.h"
 #include <Adafruit_ADS1X15.h>
 #include <SPI.h>
 
-#ifdef current
+#ifdef currentNode
 
-#define ID 16
-#define ID2 17
+#define ID 21
+#define ID2 22
 
 // For ESP32-C3 or ESP32-S3, the pins will be auto-assigned based on the MCU type.
 // Input pin types are GPIO_NUM_X, e.g. GPIO_NUM_1 for pin 1.
@@ -26,7 +26,7 @@ void setup() {
   Serial.println("Online");
   node.begin(GPIO_NUM_4, GPIO_NUM_3, 2);
   node.initializeMessage(ID, 4);
-  node.initializeMessage(ID2, 4);
+  // node.initializeMessage(ID2, 4);
 
   // The ADC input range (or gain) can be changed via the following
   // functions, but be careful never to exceed VDD +0.3V max, or to
@@ -76,7 +76,7 @@ void loop() {
   }
   printf("%d, %f A\n", adc23, current);
   node.updateMessageData(ID, current);
-  node.updateMessageData(ID2, current);
+  // node.updateMessageData(ID2, current);
   node.transmitAllMessages();
   //float current = map(adc23, 5, 6472, 0, 5000) / 1E2;
   //printf("0-1: %d  2-3: %d\n", results01, results23);
